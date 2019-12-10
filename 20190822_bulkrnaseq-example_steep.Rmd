@@ -56,16 +56,15 @@ Biological samples obtained from Marek's disease (MD) lymphomas seeded in the go
 
 # Load dependencies
 #################
-#BiocManager::install("SeqGSEA", version = "3.8")
-pacs...man <- c("GenomicRanges", "DESeq2","devtools","rafalib","GO.db","vsn","hexbin","ggplot2",
-                "GenomicFeatures","Biostrings","BSgenome","AnnotationHub","plyr","dplyr",
-                "org.Gg.eg.db","pheatmap","sva","formula.tools","pathview","biomaRt","feather",
-                "PROPER","SeqGSEA",'purrr','BioInstaller','RColorBrewer')
+pacs...man <- c("GenomicRanges","DESeq2","devtools","rafalib","GO.db","vsn","hexbin","ggplot2","GenomicFeatures","Biostrings","BSgenome","AnnotationHub","plyr","dplyr","org.Gg.eg.db","pheatmap","sva","formula.tools","pathview","biomaRt","feather","PROPER","SeqGSEA",'purrr','BioInstaller','RColorBrewer')
 
 # Install packages if need be (NTD: build docker image with dependencies)
 new.packages <- pacs...man[!(pacs...man %in% installed.packages()[,"Package"])]
-if( length(new.packages) ) 
-        install.packages(new.packages)
+if( length(new.packages) )
+    BiocManager::install(new.packages)
+    #install.packages(new.packages)
+#install.packages("DESeq2")
+#library(BiocManager)
 
 lapply(pacs...man, FUN = function(X) {
         do.call("library", list(X)) 
@@ -520,7 +519,14 @@ x <- mat
 
 hm <- pheatmap(x, annotation_col=df, fontsize = 16,
                show_rownames=FALSE,show_colnames=FALSE)
+#pdf("./plots/20191204_heatmap-DE_steep.pdf")
+#pheatmap(x, annotation_col=df, fontsize = 16,
+#               show_rownames=FALSE,show_colnames=FALSE)
+#dev.off()
+#while (!is.null(dev.list()))  dev.off()
+#dev.set(dev.next())
 hm
+
 #############################################################################
 #############################################################################
 #############################################################################
